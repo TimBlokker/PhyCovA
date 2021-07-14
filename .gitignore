@@ -1,5 +1,5 @@
-input/*
-renv/*
+input/
+renv/
 .Rproj.user
 .Rhistory
 .RData
