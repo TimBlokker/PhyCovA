@@ -43,19 +43,19 @@ RUN Rscript -e 'renv::restore()'
 
 
 #docker hub########################################################################
-#EXPOSE 3838
-#RUN chmod +x app/changeSymlink.sh
-#RUN app/changeSymlink.sh
-#ENV PATH="/opt/PhyCovA/bin:$PATH"
-#CMD ["R", "-e", "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
-#\dockerhub########################################################################
-
-####horeku#########################################################################################               
-RUN rm -rf /var/lib/apt/lists/*              
+EXPOSE 3838
 RUN chmod +x app/changeSymlink.sh
 RUN app/changeSymlink.sh
 ENV PATH="/opt/PhyCovA/bin:$PATH"
-RUN useradd shiny_user
-USER shiny_user
-CMD ["R", "-e", "shiny::runApp('/app', host = '0.0.0.0', port = as.numeric(Sys.getenv('PORT')))"]
+CMD ["R", "-e", "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
+#\dockerhub########################################################################
+
+####horeku#########################################################################################               
+#RUN rm -rf /var/lib/apt/lists/*              
+#RUN chmod +x app/changeSymlink.sh
+#RUN app/changeSymlink.sh
+#ENV PATH="/opt/PhyCovA/bin:$PATH"
+#RUN useradd shiny_user
+#USER shiny_user
+#CMD ["R", "-e", "shiny::runApp('/app', host = '0.0.0.0', port = as.numeric(Sys.getenv('PORT')))"]
 ####\horeku########################################################################################                 
