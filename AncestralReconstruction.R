@@ -122,12 +122,12 @@ max_ancestral_positions_MP<-function(tip_states, tree_not_annotated, ancestral_p
 
 
 writeAnnotatedTree<-function(tree_not_annotated, max_ancestral_positions, tip_states){
-  write.nexus(tree_not_annotated, file = "input/not_annotated.tree")
+  #write.nexus(tree_not_annotated, file = "input/not_annotated.tree")
   N <- Nnode2(tree_not_annotated)
   ancestral_states_all<-c(as.vector(tip_states),max_ancestral_positions)
   annotations <- tibble(node = 1:N, states = ancestral_states_all)
   annotated_tree <- full_join(tree_not_annotated, annotations, by = "node")
-  write.beast(annotated_tree, file = "input/annotated.tree")
+  #write.beast(annotated_tree, file = "input/annotated.tree")
   #system("cp output/test.tree input/")
   as_tibble(annotated_tree)
 }
