@@ -77,8 +77,7 @@ shinyUI(fluidPage(
                                                 "AR Method",
                                                 c(
                                                   "Maximum parsimony" = "MP",
-                                                  "Maximum likelihood" = "ML",
-                                                  "TreeTime ML - GTR method" = "TT")))))),
+                                                  "Maximum likelihood" = "ML")))))),
                  tags$div(id="tag_sampling_locations",
                           fluidRow(column(
                             12,
