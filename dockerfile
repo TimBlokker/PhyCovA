@@ -52,7 +52,7 @@ RUN Rscript -e 'renv::restore()'
 
 ####horeku#########################################################################################               
 RUN rm -rf /var/lib/apt/lists/*              
-RUN chmod +x app/changeSymlink.sh
+#RUN chmod +x app/changeSymlink.sh
 #RUN app/changeSymlink.sh
 ENV PATH="/opt/PhyCovA/bin:$PATH"
 RUN useradd shiny_user
