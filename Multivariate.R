@@ -122,7 +122,7 @@ plotting_corr<-reactive({
 
 observeEvent(input$downloadCorr, {
     transition_distances<-data_transform()
-    png(filename = paste("output/correlation",  input$tree_file$name,"zeros_",input$includeZerosMulti, "_reconstruction_",  input$Reconstruction_Method,"_Annotation_",input$annotations), unit="cm", width=20, height=20, res=300)
+    #png(filename = paste("output/correlation",  input$tree_file$name,"zeros_",input$includeZerosMulti, "_reconstruction_",  input$Reconstruction_Method,"_Annotation_",input$annotations), unit="cm", width=20, height=20, res=300)
     data<-transition_distances[colnames(transition_distances )!="Key"]
     data<-data[,order(colnames(data))]
     cor_matrix<-corrplot::corrplot(cor(data), type="upper", 
@@ -245,7 +245,7 @@ observe({
   })
   
   observeEvent(input$downloadRegsubsets, {
-    png(filename = paste("output/regsubsets_",  input$tree_file$name,"zeros_",input$includeZerosMulti, "no_coef"), unit="cm", width=20, height=20, res=300)
+    #png(filename = paste("output/regsubsets_",  input$tree_file$name,"zeros_",input$includeZerosMulti, "no_coef"), unit="cm", width=20, height=20, res=300)
     plot(lm_regsubsets())
     dev.off()
   }
