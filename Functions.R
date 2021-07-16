@@ -218,7 +218,7 @@ GenerateFinal_Transitions_Distances <- function(transitions_raw, distances_raw) 
   #adding the transitions as a column, adding the row_names as an additional variable (needed for tooltip)
   rownames(transition_distances)<-names_matrixes #adding rownames, not strictly required but neat
   
-  write.csv(transition_distances, file = paste0("output/transition_distances_", input$tree_file$name, input$Reconstruction_Method,input$annotations, ".csv"))
+  #write.csv(transition_distances, file = paste0("output/transition_distances_", input$tree_file$name, input$Reconstruction_Method,input$annotations, ".csv"))
   transition_distances
 }
  
