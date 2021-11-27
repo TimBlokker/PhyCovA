@@ -1,0 +1,216 @@
+---
+title: "PhyCovA Tutorial"
+author: "Tim Blokker"
+date: "5/4/2021"
+output: 
+  html_document:
+    number_sections: TRUE
+    toc: true
+    toc_depth: 3
+---
+<script>
+   $(document).ready(function() {
+     $head = $('#header');
+     $head.prepend('<img src=\"Logo_Lemey_Lab.jpeg\" style=\"float: right;width: 150px;\"/>')
+   });
+</script>
+
+# Getting started
+## Browser-based app
+There are 2 main ways on how to get started with PhyCovA. The first being via the browser and opening the following web-page on heroku:
+https://gentle-taiga-91395.herokuapp.com/ 
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Docker_Started.png)
+
+Be patient when accesing this page, the application goes to sleep after 30 minutes of inactivity and accessing the page after it being inactive requires the app to wake up (approximately 30s).
+
+
+## Docker image
+The other  is to download ("pull") the docker image available on dockerhub.
+Installing docker will not be part of this tutorial but very good tutorials are avaiable from:
+https://docs.docker.com/engine/install/
+https://docs.docker.com/engine/install/ubuntu/ 
+
+Once the docker engine is correctly installed we can proceed with pulling the image for PhyCova. First a few words on docker terminology. The normal docker workflow is DockerFile -> Image -> Container. The dockerfile contains the instructions that the docker engines need to "build" the image. This is already taken care of for you. The docker image is "frozen" and contains in this case everything the docker needs to work. An operating system, R, the required packages, python and treeTime package. Ok, but now let's get started and pull the image from dockerhub: https://hub.docker.com/repository/docker/timblokker/phycova :
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Pull_Docker.png)
+
+Pay attention to the "tag" of the docker image, which is the text behind the ":". For newer versions of PhyCovA, surf to the dockerhub repository and check which versions are available, by specifying the version in the "pull" command you obtain the required version.
+
+**docker pull timblokker/PhyCovA:v0.1 **
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Pulled_Docker.png)
+
+Next the docker image is available on your machine, you can check this by running: 
+
+**docker images **
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Docker_Images.png)
+
+And with this we can proceed to starting the container from the image we pulled:
+
+**docker run -d -p 3838:3838 timblokker/phycova:v0.1**
+
+It is possible to run the docker without the "-d" flag to still see the output which when running the shiny app from within RStudio is outputted in the console.The "-p" flag specifies the port that will be allocated to PhyCovA. This needs to be 3838 because it is hard-coded in the dockerfile.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Docker_Run.png)
+
+Finally, the browser can be pointed to  http://localhost:3838/ :
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Docker_Started.png)
+
+# PhyCovA
+PhyCovA can correlate transition counts or rates obtained from either trees already annotated with ancestral state information or reconstruct and annotate the ancestral states before correlating the variables.
+
+In this tutorial data originally published in the publication below will be examplary analyzed.
+
+Dudas, G., Carvalho, L. M., Bedford, T., Tatem, A. J., Baele, G., Faria, N. R., Park, D. J., Ladner, J. T., Arias, A., Asogun, D., Bielejec, F., Caddy, S. L., Cotten, M., D’Ambrozio, J., Dellicour, S., Di Caro, A., Diclaro, J. W., Duraffour, S., Elmore, M. J., … Rambaut, A. (2017). Virus genomes reveal factors that spread and sustained the Ebola epidemic. Nature, 544(7650), 309–315. https://doi.org/10.1038/nature22040
+
+
+## Already annotated trees
+### Univariate tab
+The already annotated mode requires only 2 files, the phylogeny, here we will use an MCC tree for the ebola data set and at least 1 distance matrix. The data can be obtained from github: https://github.com/sdellicour/treeDist/tree/master/input/ebola .
+The annotations in the tree must **exactly** match the column names in the pairwise distance matrices. And the phylogeny needs to be rooted.
+
+At first we upload the 2 documents using the fileupload panels, by clicking **"Browse..."**, this will open a file explorer and should be intuitive to use. 
+**Note:** For the distance matrix multiple files can be selected in the file explorer, while the "Tree File" file upload only allows 1 file.
+
+In the screenshot below the 2 files were successfully uploaded.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Annotated_before_run.png)
+
+When selecting "Yes, I took care of this!" then PhyCovA will start searching for annotations in the tree file that match the column names of the distance matrix.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Annotation label notfoun yet.png)
+
+Once an annotation was found that matches the column names in the distance matrix, PhyCovA will inform the user.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Annotation_PopUp.png)
+
+Simultaneously the found column will be displayed. In case more than one column matches the column names in the matrix the user can select the appropriate one.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/SelectedColumn_Found.png)
+
+With this PhyCovA has been given all required information and the phylogenetic covariance analysis can start by clicking "RUN". Immediately after clicking the input fields will appear but depending on the size of the tree and the number of distance matrices, the analysis might take a few seconds to 30 seconds.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Loading_Run.png)
+
+After the covariate analysis has been finished the scatterplot is visible. At first we see a scatterplot of a binary variable which is not very informative, so we change the predictor to "greatCircleDistances".
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/changePredictor.png)
+
+There are many options to improve the layout of the plots. We will leave the user to explore but some important features we would like to point out. At first the regression line can be drawn in the plot:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Regression_line.png)
+
+
+Then we can look at the residuals of the plot:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Residuals.png)
+
+Observations can be excluded to see which effect particular points have on the regression. This can be done by brushing points with the "Box Select" tool and then clicking "Toggle points". The points are then removed from the data set used for the regression analysis but are still plotted in another colour:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/toggle_points.png)
+
+The response and the predictor variable can be log-transformed but there are limitations like the log of 0 and negative values is not defined and so e.g. when including zero-transition events the log transform of the response "Transition counts" will not be possible anymore. Same counts for standardizing of the predictors, centering variables with mean 0 will unavoiably lead to negative values in the data set.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/WarningLog.png)
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Warning.png)
+
+
+The predictors can be standardized, and zero-transition events can be included. Zero-transition events are transition events that have not been observed in the tree. 
+Then the transition events can be colourized grouped by the origin location (from) or also destination ("to").
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/colourFrom.png)
+
+Lastly, PhyCovA also offers the option to summarize the transition counts by state in a bar diagram. Also here we can group observation by origin country or destination country. The option to include 0-transitons has no effect here (because we add 0...).
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/UNi_Bar.png)
+
+For this univariate case the standardization and the inclusion of the zero-transition have impact on the regression output. And this is shown and updated upon changing the input and is shown as depicted below:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Univariate_Regression.png)
+
+From here we can see that the geographic distance (greatCircleDistances) explains approximately 7% of the observed transition events (when not including zero-transitons, not standardizing). 
+
+### Multivariate tab
+Switching to the multivariate tab can be done on top of the screen:
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Multivariate_tab.png)
+
+On the multivariate tab, at first the variables to include in the analysis can be selected. We will start with keeping them all selected. And we will standardize all continuous predictors. We will keep only actually observed transition events in the data set and will not log transform the response, for this data set only the "Transition count" variable is available as response (drop_down in the top left corner, here for the treeTime reconstructions also the transition rate will be available).
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Variable_Selection.png)
+
+We can hide this panel now and move to the regression output. It always a good idea to hide panels that are not needed. Anything not displayed will not be computed and will speed up the analysis. This effect is especially profound when having many variables, including zero transitions and having the plotting panel open. **Always hide the plotting panel before changing variable selection**.
+
+The summary output shows the type III sum of squared:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/summary_multi.png)
+
+Here, we can note an adjusted R² of 35%, meaning that this model explains 35% of the variation in the transition counts after adjusting for the number of predictors included in the model. We can now take a look at the variable selection via the "leaps" package and the "regsubsets" function, which makes use of different criteria to select the best model according to e.g. "BIC" out of all possible subsets of variables or via the backward/forward selection. 
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/regsubsets.ong.png)
+
+
+
+We can note that the best model is a 4 variable model consisting of:
+ the temperature at the origin location,
+ the population size at the origin location, 
+ the geographic distance and
+ the travel distance to the next metropolitan area from the destination location.
+ **Note** For this data set using the backward selection algorithm leads to a 5 variable model. This output will also be found in the stepwise AIC model when using the "BIC" criterion.
+ 
+ We can now go ahead and build a linear model with only the seleced variabeles:
+ 
+ ![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Variable_SelectionSelected.png)
+
+
+The adjusted R² for this data set did not change when reducing the model to the selected variables only:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/summary_multi_selected.png)
+
+To conclude the Multivariate tab we can move on to the plotting panel:
+
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/scatter_multi.png)
+
+In addition correlation plots can be visualized:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Corplotpng.png)
+
+### Tree exploration
+The phylogeny can also be visualized in PhyCovA:
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Tree_initial.png)
+This tree is generated by "Plotly" and is zoomable, hence the name in the drop-down to the right. The user can play a bit with the selection, panning, zooming tools in the top right corner of teh plotting area. The tree height can also be changed and very large plots can be plotted and one can scroll through the plot. One can also colour the tree and show more of the availale information by ticking the box for "coloured by states" and unticking the box for "Reduce datapoints for large tree...". 
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/coloured_tree.png)
+
+Unticking the latter box is only affecting information in the tooltips.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/tooltip.png)
+
+
+
+One can only highlight only certain states, to see where this state is located in the tree. This is here done by double-clikcing on the state in the legend. We can see that Gueckedou was the likely starting point of the Ebola pandemic as it is mainly annotated as state at the root of the phylogeny.
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Gueckedou.png)
+
+Next to a zoomable tree there is also a non-zoomable tree, which can be annotated in more detail. The 2 trees are intended to work together. One possible use case is to identify the region of a tree of interest. Get the node number of the tree via the tooltip. E.g. in this example above this was node 2218. We can look at only this node and its offspring in the annotation tree:
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/nodenumber.png)
+
+And from this subtree many annotations can be shown on the tree, like the ancestral state, the node shapes etc.
+
+# Reset
+In case one has finished analyzing the data set and want to analyze something else, one opens the "Univariate" tab and clicks "RESET". Now all input is cleared and new files can be uploaded.
+
+# Non-Annotated tree
+For non-annotated trees, also a phylogeny and at least 1 distance matrix is required. In  addition to these 2 files PhyCovA required a sorted list of tip states and the states need be **exactly** the same as the column names in the distance matrices.
+
+One can now select 1 of the 3 possible reconstruction methods and carry out the analysis as described above for the annotated case.
+
+
+![](/home/tim/Documents/Bioinformatics/MasterThesis/treeDist/Tutorial/Non_annotated.png)
+
+
+
+This concludes the tutorial for PhyCovA.
