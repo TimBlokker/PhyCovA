@@ -102,6 +102,13 @@ shinyUI(fluidPage(
         fluidRow(
           shinyjs::hidden(
             tags$div(class="regression_control",
+          tags$h5("Note: PhyCovA is not designed to produce statistically rigorous results that are 
+                                      publication-ready, but is intended as a data exploration tool allowing users to quickly
+                                      test hypotheses that help in directing a more formal analysis.")
+        ))),
+        fluidRow(
+          shinyjs::hidden(
+            tags$div(class="regression_control",
                      conditionalPanel(condition = "input.Scatter_residual=='scatter'",
                                       tags$h4("Plotly - scatterplot"),
                                       plotlyOutput(outputId = "plot")
