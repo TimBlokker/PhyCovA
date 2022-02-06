@@ -106,7 +106,7 @@ shinyUI(fluidPage(
                                 )
                      )
                    ),
-                   bsTooltip("q6", "Indicate wether the internal nodes of the tree are already annotated.",
+                   bsTooltip("q6", "Indicate wether the internal nodes of the tree are already annotated. In case you select YES, then the application will look for the annotation in the tree that matches the column names in the distance matrix. Iy you specify NO then you can choose how you would like to calculate the annotation of the nodes.",
                              "right", options = list(container = "body"))
                    )
                  ),
