@@ -1,4 +1,4 @@
-options(shiny.maxRequestSize=10*1024^2) #10mb max file size
+options(shiny.maxRequestSize=100*1024^2) #10mb max file size
 
 #' Shiny server is doing the back-end work for the treedist application. It consists of 5 files in total. This server.R file itsels, 3 files that are sourced upon startup of the app
 #' (Functions.R, Multivariate.R, AncestralReconstruction.R) and the Tree.R file which is encapsulated within the "RUN" observer. 
