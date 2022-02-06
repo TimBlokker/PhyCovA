@@ -1,6 +1,6 @@
 #Univariate ####
 ##Sidebar####
-
+library(shinyBS)
 shinyUI(fluidPage(
   shinyjs::useShinyjs(), #activate Shinyjs
   tabsetPanel(tabPanel(
@@ -25,45 +25,91 @@ shinyUI(fluidPage(
                           tags$h4("Input controls:"),
                           fluidRow(column(12,
                                           fileInput(
-                                            "tree_file", label = ("Tree file")
-                                          )))),
+                                            "tree_file", 
+                                            label = h5(HTML(paste("<b>", "Tree file", "</b>")),
+                                               tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                               bsButton("q1", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                                        )
+                                               )
+                                          ),
+                                          bsTooltip("q1", "Add a tree file, e.g. a beast annotated tree file or an unannotated nexus file by clicking BROWSE and selecting the tree file in the appearing pop-up. Note: File names can not start with a hyphen (-) or a digit.In case the tree is already annotated, the annotations in the tree must exactly match the column names in the pairwise distance matrices. For both annotated and not annotated trees the phylogeny needs to be rooted",
+                                                        "right", options = list(container = "body"))
+                                          
+                                          ))),
                  fluidRow(column(
                    12,
                    selectInput(
                      inputId = "file_type",
-                     label = "Select tree file type:",
-                     choices = c("Beast" = "beast",
+                     label = h5(HTML(paste("<b>", "Select tree file type:", "</b>")),
+                                tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                bsButton("q2", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                )
+                     ),
+                                  choices = c("Beast" = "beast",
                                  #"MrBayes" = "mrbayes",
                                  #"phylip" = "phylip",
                                  #"Nexus" = "nexus",
                                  #"Newick" = "newick"),
                                  selected = "beast"
-                     )
-                   ))
+                     )),
+                   bsTooltip("q2", "Select the format of the tree file, e.g. a beast annotated tree file or an unannotated nexus file. The options depend on whether annotation is required or not, see below at the selection field: Is the tree annotated?",
+                             "right", options = list(container = "body"))
+                   ),
                  ),
                  tags$div(class="distance_matrix_input",
                           fluidRow(column(12,
                                           fileInput(
-                                            "distances_file", label = ("Matrix-based predictors"), multiple=T
-                                          ))),
+                                            "distances_file", label = h5(HTML(paste("<b>", "Matrix-based predictors", "</b>")),
+                                                                         tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                                                         bsButton("q3", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                                                         )
+                                            ),
+                                          multiple=T
+                                          ),
+                                          bsTooltip("q3", "Select at least 1 distance matrix, this fie input field accepts more than 1 file. These files can be selected as in a regular file explorer by holding CTRL pressed while selecting the files intended for upload. Note: File names can not start with a hyphen (-) or a digit. The column names of the file that is uploaded here are a central element in the analysis. The annotation states of the tree (if it is already annotated) need to match these column names. Also the population sizes file needs to have the exact names of the states in the first column. ",
+                                                    "right", options = list(container = "body"))
+                          )
+                          ),
                           fluidRow(column(
                             12,
-                            textInput(inputId = "delimiter", "Delimiter distance matrices (optional)", value ="")
+                            textInput(inputId = "delimiter",
+                                      label = h5(HTML(paste("<b>", "Delimiter distance matrices (optional)", "</b>")),
+                                                 tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                                 bsButton("q4", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                                 )
+                                      )
+                          ),
+                          bsTooltip("q4", "Here you can specify the delimiter for the distance matrix files. PhyCovA is able to identify the most common delimiters (comma , tab, semicolon, space , dash, underscore) but in case your favourite delimiter happens to be an @, then you can specify this here.",
+                                    "right", options = list(container = "body"))
                           ))),
                  fluidRow(column(12,
                                  fileInput(
-                                   "population_sizes_file", label = ("List of population sizes (optional)")
-                                 ))),
+                                   "population_sizes_file", label = h5(HTML(paste("<b>", "List of population sizes (optional)", "</b>")),
+                                                                       tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                                                       bsButton("q5", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                                                       )
+                                   )
+                                 ),
+                                 bsTooltip("q5", "The population size file needs to be a 2-column file with the first column being the states and the second column being the population sizes. The states must have the exact same name as in the column names of the distance matrix.",
+                                           "right", options = list(container = "body"))
+                                 )),
                  fluidRow(column(
                    12,
                    radioButtons(
                      inputId = "annotations",
-                     label = "Is the tree annotated?",
                      choices = c(
                        "No, please annotate my tree" = FALSE,
-                       "Yes, I took care of this!" = TRUE)
+                       "Yes, I took care of this!" = TRUE),
+                     label = h5(HTML(paste("<b>", "Is the tree annotated?", "</b>")),
+                                tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                )
+                     )
+                   ),
+                   bsTooltip("q6", "Indicate wether the internal nodes of the tree are already annotated.",
+                             "right", options = list(container = "body"))
                    )
-                 )),
+                 ),
                  wellPanel("Annotations",
                            conditionalPanel(condition = "input.annotations=='TRUE'",
                                             fluidRow(column(
@@ -87,7 +133,14 @@ shinyUI(fluidPage(
                  tags$div(id="tag_sampling_locations",
                           fluidRow(column(
                             12,
-                            fileInput("sampling_locations", label ="Sampling locations")
+                            fileInput("sampling_locations", label = h5(HTML(paste("<b>", "Sampling locations", "</b>")),
+                                                                       tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                                                       bsButton("q7", label = "", icon = icon("question"), style = "info", size = "extra-small"
+                                                                       )
+                            )
+                            ),
+                            bsTooltip("q7", "Ordered list of tip states (only for non-annotated trees). This file needs to contains a 1 column text file. The length of the states needs to match the number of the tip states in the tree and the states need to be the same as column names in the distance matrix.",
+                                      "right", options = list(container = "body"))
                           ))
                  ),
                  # fluidRow(column(
@@ -98,7 +151,9 @@ shinyUI(fluidPage(
                  tags$div(class="run",
                           fluidRow(
                             column(6,actionButton("start", label = h4("RUN"), col.label ="red")),
-                            column(6,actionButton("reset", label = h4("RESET"), col.label ="red"))
+                            column(6,actionButton("reset", label = h4("RESET"), col.label ="red")),
+                            bsTooltip("start", "RUN calculaions, Inputs will be frozen until RESET is pressed",
+                                      "right", options = list(container = "body"))
                             
                           ))
                )),
