@@ -38,7 +38,7 @@ shinyUI(fluidPage(
                  tags$div(class="distance_matrix_input",
                           fluidRow(column(12,
                                           fileInput(
-                                            "distances_file", label = ("Distance matrix"), multiple=T
+                                            "distances_file", label = ("Matrix-based predictors"), multiple=T
                                           ))),
                           fluidRow(column(
                             12,
