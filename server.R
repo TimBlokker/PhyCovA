@@ -5,6 +5,7 @@ options(shiny.maxRequestSize=10*1024^2) #10mb max file size
 #' @param input
 #' @param output
 #' @param session
+library(shinyBS)
 shinyServer(function(input, output, session) {
   source("Functions.R", local=T)
   
