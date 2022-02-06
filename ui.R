@@ -5,11 +5,16 @@ shinyUI(fluidPage(
   shinyjs::useShinyjs(), #activate Shinyjs
   tabsetPanel(tabPanel(
     "Univariate analysis",
-    headerPanel(
-      list(HTML('<img src=Logo_Lemey_Lab.jpeg height=100 width=100/>'),
-           "PhyCovA"),
+    titlePanel(
+      list(
+        column(9,tags$img(
+          src="Logo_Lemey_Lab.jpeg", height="100px", width="100px"),
+          "PhyCovA"),
+          column(3,tags$a(href="https://github.com/TimBlokker/PhyCovA/tree/master/input", h5("Input"), align ="right"))
+        ),
       windowTitle="PhyCovA"
     ),
+    fluidRow(),
     sidebarLayout(
       tags$div(class="sidebar", id="sidebar",
                sidebarPanel(
