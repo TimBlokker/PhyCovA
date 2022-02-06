@@ -7,14 +7,15 @@ shinyUI(fluidPage(
     "Univariate analysis",
     titlePanel(
       list(
-        column(9,tags$img(
+        column(12,tags$img(
           src="Logo_Lemey_Lab.jpeg", height="100px", width="100px"),
-          "PhyCovA"),
-          column(3,tags$a(href="https://github.com/TimBlokker/PhyCovA/tree/master/input", h5("Input"), align ="right"))
+          "PhyCovA")
         ),
       windowTitle="PhyCovA"
     ),
-    fluidRow(),
+    fluidRow(
+      column(3,tags$a(href="https://github.com/TimBlokker/PhyCovA/tree/master/input", h5("Example files can be downloaded here"), align ="center"))
+    ),
     sidebarLayout(
       tags$div(class="sidebar", id="sidebar",
                sidebarPanel(
