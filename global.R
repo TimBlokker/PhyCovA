@@ -6,7 +6,7 @@ library(shinyWidgets)
 library(plotly)
 
 #server.R ####
-library(raster)
+#library(raster)
 library(tidyverse)#dplyr...
 library(ape) #ancestral reconstruciton, tree import
 library(treeio) # tree visualization
