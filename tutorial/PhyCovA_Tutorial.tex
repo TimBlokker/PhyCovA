@@ -37,7 +37,6 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={PhyCovA Tutorial},
-  pdfauthor={Tim Blokker},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -64,8 +63,8 @@
 \fi
 
 \title{PhyCovA Tutorial}
-\author{Tim Blokker}
-\date{5/4/2021}
+\author{}
+\date{\vspace{-2.5em}08/02/2022}
 
 \begin{document}
 \maketitle
@@ -84,7 +83,7 @@ There are 2 ways on how to get started with PhyCovA. The first being via
 the browser and opening the following web-page:
 \url{https://evolcompvir-kuleuven.shinyapps.io/PhyCovA/}
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/evolcompvir_start_up.png}
+\includegraphics{tutorial_img/evolcompvir_start_up.png}
 
 \hypertarget{docker-image}{%
 \subsection{Docker image}\label{docker-image}}
@@ -110,7 +109,7 @@ required packages, python and the TreeTime package.
 The first step is to pull the image from dockerhub:
 \url{https://hub.docker.com/repository/docker/timblokker/phycova} :
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Pull_Docker.png}
+\includegraphics{tutorial_img/Pull_Docker.png}
 
 Pay attention to the ``tag'' of the docker image, which is the text
 behind the ``:''. For newer versions of PhyCovA, surf to the dockerhub
@@ -119,14 +118,14 @@ tag/version in the ``pull'' command you obtain the required version.
 
 \textbf{\texttt{docker\ pull\ timblokker/PhyCovA:v0.1}}
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Pulled_Docker.png}
+\includegraphics{tutorial_img/Pulled_Docker.png}
 
 Next the docker image is available on your machine, you can check this
 by running:
 
 \textbf{\texttt{docker\ images}}
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Docker_Images.png}
+\includegraphics{tutorial_img/Docker_Images.png}
 
 And with this we can proceed to starting the container from the image we
 pulled:
@@ -139,11 +138,11 @@ RStudio is outputted on the RStudio console.The ``-p''\emph{ort} flag
 specifies the port that will be allocated to PhyCovA. This needs to be
 3838 and is hard-coded in the Dockerfile.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Docker_Run.png}
+\includegraphics{tutorial_img/Docker_Run.png}
 
 Finally, the browser can be pointed to \url{http://localhost:3838/}
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Docker_Started.png}
+\includegraphics{tutorial_img/Docker_Started.png}
 
 \hypertarget{phycova}{%
 \section{PhyCovA}\label{phycova}}
@@ -192,24 +191,24 @@ Additional limitations on the files are:
   Hyphens (``-'') are not recommended, rather use underscores (``\_'')
 \end{itemize}
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Annotated_before_run.png}
+\includegraphics{tutorial_img/Annotated_before_run.png}
 
 When selecting ``Yes, I took care of this!'' then PhyCovA will start
 searching for annotations in the tree file that match the column namesof
 the distance matrix.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Annotation label notfoun yet.png}
+\includegraphics{tutorial_img/Annotation_label_notfoundyet.png}
 
 Once an annotation was found that matches the column names in the
 distance matrix, PhyCovA will inform the user.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Annotation_PopUp.png}
+\includegraphics{tutorial_img/Annotation_PopUp.png}
 
 Simultaneously the found column will be displayed. In case more than one
 column matches the column names in the matrix the user can select the
 appropriate one.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/SelectedColumn_Found.png}
+\includegraphics{tutorial_img/SelectedColumn_Found.png}
 
 With this PhyCovA has been given all required information and the
 phylogenetic covariance analysis can start by clicking ``RUN''.
@@ -217,24 +216,24 @@ Immediately after clicking the input fields will appear but depending on
 the size of the tree and the number of distance matrices, the analysis
 might take a few seconds to 30 seconds.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Loading_Run.png}
+\includegraphics{tutorial_img/Loading_Run.png}
 
 After the covariate analysis has been finished the scatterplot is
 visible. At first we see a scatterplot of a binary variable which is not
 very informative, so we change the predictor to
 ``greatCircleDistances''.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/changePredictor.png}
+\includegraphics{tutorial_img/changePredictor.png}
 
 There are many options to improve the layout of the plots. We will leave
 the user to explore but some important features we would like to point
 out. At first the regression line can be drawn in the plot:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Regression_line.png}
+\includegraphics{tutorial_img/Regression_line.png}
 
 Then we can look at the residuals of linear regression:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Residuals.png}
+\includegraphics{tutorial_img/Residuals.png}
 
 Observations can be excluded to see which effect particular points have
 on the regression. This can be done by brushing points with the ``Box
@@ -242,7 +241,7 @@ Select'' tool and then clicking ``Toggle points''. The points are then
 removed from the data set used for the regression analysis but are still
 plotted in another colour:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/toggle_points.png}
+\includegraphics{tutorial_img/toggle_points.png}
 
 The response and the predictor variable can be log-transformed but there
 are limitations like the log of 0 and negative values is not defined and
@@ -252,28 +251,28 @@ anymore. Same counts for standardising of the predictors, centering
 variables with mean 0 will unavoidably lead to negative values in the
 data set.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/WarningLog.png}
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Warning.png}
+\includegraphics{tutorial_img/WarningLog.png}
+\includegraphics{tutorial_img/Warning.png}
 
 The predictors can be standardized, and zero-transition events can be
 included. Zero-transition events are transition events that have not
-been observed in the tree. Then the transition events can be colourized
+been observed in the tree. Then the transition events can be colorized
 grouped by the origin location (``from'') or also destination (``to'').
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/colourFrom.png}
+\includegraphics{tutorial_img/colourFrom.png}
 
 Lastly, PhyCovA also offers the option to summarize the transition
 counts by state in a bar diagram. Also here we can group observation by
 origin country or destination country. The option to include
 0-transitions has no effect here (because we add 0\ldots).
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/UNi_Bar.png}
+\includegraphics{tutorial_img/UNi_Bar.png}
 
 For this univariate case the standardization and the inclusion of the
 0-transitions have impact on the regression output. And this is shown
 and updated upon changing the input and is shown as depicted below:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Univariate_Regression.png}
+\includegraphics{tutorial_img/Univariate_Regression.png}
 
 From here we can see that the geographic distance (greatCircleDistances)
 explains approximately 7\% of the observed transition events (when not
@@ -284,7 +283,7 @@ including zero-transitions, not standardizing).
 
 Switching to the multivariate tab can be done on top of the screen:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Multivariate_tab.png}
+\includegraphics{tutorial_img/Multivariate_tab.png}
 
 On the multivariate tab, at first the variables to include in the
 analysis can be selected. We will start with keeping them all selected.
@@ -295,7 +294,7 @@ variable is available as response (drop-down menu in the top left
 corner, here for the TreeTime reconstructions also the transition rate
 will be available).
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Variable_Selection.png}
+\includegraphics{tutorial_img/Variable_Selection.png}
 
 We can hide this panel now and move to the regression output. It is
 always a good idea to hide panels that are not needed. Anything not
@@ -306,7 +305,7 @@ plotting panel before changing variable selection}.
 
 The summary output shows the type III sum of squares:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/summary_multi.png}
+\includegraphics{tutorial_img/summary_multi.png}
 
 Here, we can note an adjusted R² of 35\%, meaning that this model
 explains 35\% of the variation in the transition counts after adjusting
@@ -316,7 +315,7 @@ look at the variable selection via the ``leaps'' package and the
 the best model according to e.g.~``BIC'' out of all possible subsets of
 variables or via the backward/forward selection.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/regsubsets.ong.png}
+\includegraphics{tutorial_img/regsubsets.ong.png}
 
 This plot shows 1 model for each number of variables. Each model is the
 best model for this amount of variables according to the BIC criterion.
@@ -335,42 +334,41 @@ stepwise AIC model when using the ``BIC'' criterion.
 We can now go ahead and build a linear model with only the seleced
 variabeles:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Variable_SelectionSelected.png}
+\includegraphics{tutorial_img/Variable_SelectionSelected.png}
 
 The adjusted R² for this data set did not change when reducing the model
 to the selected variables only.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/summary_multi_selected.png}
+\includegraphics{tutorial_img/summary_multi_selected.png}
 
 To conclude the Multivariate tab we can move on to the plotting panel:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/scatter_multi.png}
+\includegraphics{tutorial_img/scatter_multi.png}
 
 In addition correlation plots can be visualized:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Corplotpng.png}
+\includegraphics{tutorial_img/Corplotpng.png}
 
 \hypertarget{tree-exploration}{%
 \subsubsection{Tree exploration}\label{tree-exploration}}
 
 The phylogeny can also be visualized in PhyCovA:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Tree_initial.png}
-This tree is generated by ``Plotly'' and is zoomable, hence the name in
-the drop-down to the right. The user has different tools available such
-as selection, panning and zooming tools in the top right corner of the
-plotting area. The tree height can also be changed and very large plots
-can be plotted and one can scroll through the plot. One can also colour
-the tree and show more of the availale information by ticking the box
-for ``Coloured by states'' and unticking the box for ``Reduce datapoints
-for large trees (scattergl) in trade for a condirate performance
-boost''.
+\includegraphics{tutorial_img/Tree_initial.png} This tree is generated
+by ``Plotly'' and is zoomable, hence the name in the drop-down to the
+right. The user has different tools available such as selection, panning
+and zooming tools in the top right corner of the plotting area. The tree
+height can also be changed and very large plots can be plotted and one
+can scroll through the plot. One can also colour the tree and show more
+of the availale information by ticking the box for ``Coloured by
+states'' and unticking the box for ``Reduce datapoints for large trees
+(scattergl) in trade for a condirate performance boost''.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/coloured_tree.png}
+\includegraphics{tutorial_img/coloured_tree.png}
 
 Unticking the latter box is only affecting information in the tooltips.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/tooltip.png}
+\includegraphics{tutorial_img/tooltip.png}
 
 One can only highlight only certain states, to see where this state is
 located in the tree. This is here done by double-clikcing on the state
@@ -378,7 +376,7 @@ in the legend. We can see that Gueckedou was the likely starting point
 of the Ebola pandemic as it is mainly annotated as state at the root and
 nodes in proximity of the root of the phylogeny.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Gueckedou.png}
+\includegraphics{tutorial_img/Gueckedou.png}
 
 Next to a zoomable tree there is also a non-zoomable tree, which can be
 annotated in more detail. The 2 trees are intended to work together. One
@@ -387,7 +385,7 @@ the node number of the tree via the tooltip, e.g.~in this example above
 this was node 2218. We can look at only this node and its offspring in
 the annotation tree:
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/nodenumber.png}
+\includegraphics{tutorial_img/nodenumber.png}
 
 And from this subtree many annotations can be shown on the tree, like
 the ancestral state, the node shapes etc.
@@ -410,7 +408,7 @@ column names in the distance matrices.
 One can now select 1 of the 3 possible reconstruction methods and carry
 out the analysis as described above for the annotated case.
 
-\includegraphics{/home/tim/Documents/PhyCovA/tutorial/tutorial_img/Non_annotated.png}
+\includegraphics{tutorial_img/Non_annotated.png}
 
 This concludes the tutorial for PhyCovA.
 

@@ -1,7 +1,6 @@
 ---
 title: "PhyCovA Tutorial"
-author: "Tim Blokker"
-date: "5/4/2021"
+date: "08/02/2022"
 output:
   word_document:
     toc: yes
@@ -162,7 +161,7 @@ The response and the predictor variable can be log-transformed but there are lim
 
 The predictors can be standardized, and zero-transition events can be
 included. Zero-transition events are transition events that have not
-been observed in the tree. Then the transition events can be colourized grouped by the origin location ("from") or also destination ("to").
+been observed in the tree. Then the transition events can be colorized grouped by the origin location ("from") or also destination ("to").
 
 ![](tutorial_img/colourFrom.png)
 
