@@ -115,9 +115,8 @@ plotting_corr<-reactive({
   data<-transition_distances[colnames(transition_distances )!="Key"]
   data<-data[,order(colnames(data))]
   cor_matrix<-corrplot::corrplot(cor(data), type="upper",
-           col=brewer.pal(n=8, name="RdYlBu") )
-  M<-corrplot::corrplot(cor_matrix, type="upper",order="original", tl.cex = 1.5, addCoef.col = "black", diag = FALSE)
-  M
+           col=brewer.pal(n=8, name="RdYlBu"),order="original", tl.cex = 1.5, addCoef.col = "black", diag = FALSE)
+  cor_matrix
 })
 
 observeEvent(input$downloadCorr, {
